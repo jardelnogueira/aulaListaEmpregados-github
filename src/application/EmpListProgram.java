@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import entities.Employees;
+import entities.Employer;
 
 public class EmpListProgram {
 
@@ -58,11 +59,31 @@ public class EmpListProgram {
 			
 		} while (answer.equals("y"));
 		
+		List<Employer> eList = new ArrayList<Employer>();
+
 		System.out.printf("%nList of employees:%n");
 		for (Employees emp : empList) {
 			System.out.println(emp);
 		}
 		
+		System.out.println("Now enter the employer data: ");
+		System.out.print("Id: ");
+		int eId = sc.nextInt();
+		System.out.print("Name: ");
+		sc.nextLine();
+		String eName = sc.nextLine();
+		eList.add(new Employer(eId, eName));
+		
+		for (Employees emp : empList) {
+			for (Employer employer : eList) {
+				employer.calcProfit(emp.getSalary());
+			}
+		}
+		
+		System.out.printf("%nEmployer data:%n");
+		for (Employer employer : eList) {
+			System.out.println(employer);
+		}
 		sc.close();	
 	}
 	
